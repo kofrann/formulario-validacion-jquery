@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Maqueta Web</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="Pagina web para desarrolo de aplicaciones web">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <meta name="author" content="Franco urra">
+        <link  rel="stylesheet" href="css/estilo.css"  />
+           <script src="js/jquery-3.3.1.min.js"></script>
+           <script src="js/jquery.Rut.js"></script>
+           <script src="js/jquery.rut.js"></script>
+        <script>
+            
+            $(document).ready(function(){
+                
+                $("input[name='nombre']").blur(function(){
+                    console.log("Verificando si el valor para el campo nombre tiene más de 3 caracteres.");
+                    var nombre = $(this).val();
+                    if(nombre === "" || nombre.length < 3) {
+                        console.log("El campo no es válido");
+                        $(this).addClass("inputError");
+                        $("#msgErroNombre").html("El Largo del Campo debe ser al menos 3 letras");
+                        $("#msgErroNombre").show();
+                    } else {
+                        console.log("El campo está Ok!");
+                        $(this).removeClass("inputError");
+                        $("#msgErroNombre").hide();
+                    } 
+                });
+                $("input[name='apellido']").blur(function(){
+                    console.log("Verificando si el valor para el campo nombre tiene más de 3 caracteres.");
+                    var apellido = $(this).val();
+                    if(apellido === "" || apellido.length < 3) {
+                        console.log("El campo no es válido");
+                        $(this).addClass("inputError");
+                        $("#msgErroApellido").html("El Largo del Campo debe ser al menos 3 letras");
+                        $("#msgErroApellido").show();
+                    } else {
+                        console.log("El campo está Ok!");
+                        $(this).removeClass("inputError");
+                        $("#msgErroApellido").hide();
+                    } 
+                });
+                ///////VALIDACION SEXO////////////////
+               /**
+                * $("#boton").click(function () {	 
+			alert($('input:radio[name=sexo]:checked').val());
+			$("#formulario").submit();
+			});
+                */
+                        
+                $(document).ready(function () {
+                $("#boton").click(function () {
+                var $elegido =$("input[name=opcion]:checked");
+                if ($elegido.val())
+                    alert("SELECCIONADO " +$elegido.val());
+                else {
+                    alert("NINGUN VALOR SELECCIONADO")  
+                }   
+            });
+        });
+                
+                /////Validacion Rut/////
+               
+                $("input#rut").rut({
+                formatOn: 'keyup',
+                minimumLength: 8, // validar largo mínimo; default: 2
+                validateOn: 'change' // si no se quiere validar, pasar null
+                });
+
+                
+                $("input#rut").rut({useThousandsSeparator : false}); //formateará '145694841' como '14569484-1'
+                
+                $("input#rut").rut().on('rutInvalido', function(e) {
+                $("#msgErroRut").html("Rut invalido");
+                $("#msgErroRut").show();
+                });
+                // muestra un mensaje de alerta con el rut y el dígito 
+                // verificador cuando el RUT es válido
+                $("input#rut").rut().on('rutValido', function(e, rut, dv) {
+                $("#msgErroRut").html("Rut valido");
+                $("#msgErroRut").hide();
+                });              
+
+               
+        //////////////////////////VALIDAR FECHA////////////////////////////////////////
+                function validar() {
+                var inicio = document.getElementById('fechaNacimiento').value; 
+                var finalq  = document.getElementById(new date).value;
+                inicio= new Date(inicio);
+                finalq= new Date(finalq);
+                if(inicio>finalq){
+                $("#msgErroFechaNac").html("Fecha Invalida");
+                $("#msgErroFechaNac").show();            
+                }else{
+                $("#msgErroFechaNac").html("Fecha Valida");
+                $("#msgErroFechaNac").hide(); 
+                }
+                
+            
+            
+        }
+                ////////////////////FIN VALIDAR FECHA//////////////////////////////////
+            });
+
+        </script>
+        
+    </head>
+    
+    <body>
+        <header>        
+            <div id="cabecera">
+            <h2>Pagina Web</h2>
+         </header>    
+        <nav class="menu">
+                <ul>
+                    <li class="lista">MENU PRINCIPAL</li>                    
+                    <li class="lista"><a href="index.html">Inicio</a></li>
+                    <li class="lista"><a href="listar.html">Listar</a></li>
+                    <li class="lista"><a href="registrar.html">Registrar</a></li>
+                </ul>
+            </nav>  <section id="contenido">
+                <h1>
+                    Registrar
+                </h1>
+                <form action="registrar_ok.html" method="POST" id="formulario">
+                    <table>
+                        <tr>
+                            <td class="etiqueta">Nombre</td>
+                            <td class="campoEntrada">
+                                <input type="text" name="nombre" value="" placeholder="Nombre" />
+                                <span class="error" id="msgErroNombre">El nombre no es valido</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="etiqueta">Apellido</td>
+                            <td class="campoEntrada">
+                                <input type="text" name="apellido" value="" placeholder="Apellido" />
+                                <span class="error" id="msgErroApellido">El Apellido no es valido</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="etiqueta">Rut</td>
+                            <td class="campoEntrada">
+                                <input type="text" name="rut" value=""  placeholder="12.345.678-9" id="rut" />
+                                <span class="error" id="msgErroRut">El Rut no es valido</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="etiqueta">Fecha Nacimiento</td>
+                            <td class="campoEntrada">
+                                <input type="date" name="fechaNacimiento" value="" />
+                                <span class="error" id="msgErroFechaNac">La fecha nac no es valido</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="etiqueta">Sexo</td>
+                            <td class="campoEntrada">
+                                <input type="radio" name="sexo" value="f" />Femenino
+                                <input type="radio" name="sexo" value="m" />Masculino
+                                <span class="error" id="msgErroSexo">Ingrese Sexo</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="etiqueta">Estado Civil</td>
+                            <td class="campoEntrada">
+                                <select name="estadoCivil">
+                                    <option value="casado">Casado/a</option>
+                                    <option value="soltero">Soltero/a</option>
+                                    <option value="viudo">Viudo/a</option>
+                                </select>
+                                <span class="error" id="msgErroEstadoCivil">Seleccione opcion</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="etiqueta">Medio Transporte</td>
+                            <td class="campoEntrada">
+                                <input type="checkbox" name="transporte" value="automovil" />Automóvil
+                                <input type="checkbox" name="transporte" value="motocicleta" />Motocicleta
+                                <input type="checkbox" name="transporte" value="autobus" />Autobus
+                                <input type="checkbox" name="transporte" value="bicicleta" />Bicicleta
+                                <input type="checkbox" name="transporte" value="uber" />Uber
+                                <input type="checkbox" name="transporte" value="metro" />Metro
+                                <input type="checkbox" name="transporte" value="caminando" />Caminando
+                                <br>
+                                <span class="error" id="msgErroMedioTransporte">Seleccione opcion de Transporte</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input type="submit" name="enviar" value="Registrar" />
+                                <input type="reset" name="limpiar" value="Limpiar" />
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </section>
+        
+                   
+            <footer><p>Trabajo para Diseño de Aplicaciones Web, Copryright &COPY; 2018</p></footer>
+    </body>
+</html>

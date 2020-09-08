@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Maqueta Web</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="Pagina web para desarrolo de aplicaciones web">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <meta name="author" content="Franco urra">
+        <link  rel="stylesheet" href="css/estilo.css"  />
+           <script src="js/jquery-3.3.1.min.js"></script>
+        <script>
+            
+            $(document).ready(function(){
+                
+                $("input[name='nombre']").blur(function(){
+                    console.log("Verificando si el valor para el campo nombre tiene más de 3 caracteres.");
+                    var nombre = $(this).val();
+                    if(nombre === "" || nombre.length < 3) {
+                        console.log("El campo no es válido");
+                        $(this).addClass("inputError");
+                    } else {
+                        console.log("El campo está Ok!");
+                        $(this).removeClass("inputError");
+                    }
+                });
+            });
+
+        </script>
+        
+    </head>
+    
+    <body>
+        <header>        
+            <div id="cabecera">
+            <h2>Pagina Web</h2>
+         </header>    
+        <nav class="menu">
+                <ul>
+                    <li class="lista">MENU PRINCIPAL</li>                    
+                    <li class="lista"><a href="index.html">Inicio</a></li>
+                    <li class="lista"><a href="listar.html">Listar</a></li>
+                    <li class="lista"><a href="registrar.html">Registrar</a></li>
+                </ul>
+            </nav>  <section id="contenido">
+                <h1>
+                    Registrar
+                </h1>
+                 <div class="exito">
+                    <!-- Datos enviados exitosamente-->
+                </div>
+            </section>
+        
+            <section id="cajas">
+               
+                
+                <div >
+                    <img src="imagenes/logo_html5.png">
+                    <h4>HTML5</h4>
+                    </div>
+                
+                 <div >
+                    <img src="imagenes/logo_css.png">
+                    <h4>CSS3</h4>
+                    </div>
+                <div >
+                    <img src="imagenes/logo_jquery.gif">
+                    <h4>JQUERY</h4>
+                    
+                    
+                </div>   
+            </section>            
+            <footer><p>Trabajo para Diseño de Aplicaciones Web, Copryright &COPY; 2018</p></footer>
+    </body>
+</html>
